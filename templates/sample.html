@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <style>
+        #map {
+            width: 100%;
+            height: calc(100vh - 150px); /* Adjusted height to accommodate navbar */
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map">
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+        <script>
+            // Map initialization 
+            var map = L.map('map').setView([23.5, 81], 5);
+        
+            //osm layer
+            var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+            osm.addTo(map);
+        </script>
+    </div>
+    <div id="button-container">
+        <button>Cloak In</button>
+        
+    </div>
+    <script>
+        // map.locate({setView: true, maxZoom: 16});
+        // navigator.geolocation.getCurrentPosition()
+        // console.log("Your location is: "+ map.locate());
+        map.on('click', function(e){
+            var coord = e.latlng;
+            var lat = coord.lat;
+            var lng = coord.lng;
+            console.log("You clicked the map at latitude: " + lat + " and longitude: " + lng);
+        });
+    </script>
+        <div id="location_detais">
+        <H4>Your location current location is this: {{lat + " & "+lng}} </H4>    
+        </div>  
+    
+</body>
+</html>
