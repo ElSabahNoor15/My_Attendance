@@ -122,7 +122,10 @@ def location_logging():
         db.push(attendanceData)
     return render_template('Attendance_map_page.html')
 
-    
+@app.route('/logout')
+def logout():
+    auth.current_user = None
+    return redirect('/loginpage')   
 
 
 
