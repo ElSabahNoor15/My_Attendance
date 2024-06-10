@@ -8,7 +8,16 @@ geoloc = Nominatim(user_agent="GetLoc")
 latlong = g.latlng
 
 ltlg = ', '.join(str(e) for e in latlong)
-print(type(ltlg))
+#print(ltlg)
 locname = geoloc.reverse(latlong)
 locdetails = ' '.join(str(e) for e in locname)
-print(type(locdetails))
+#print(locdetails)
+
+import json
+from urllib.request import urlopen
+
+url = 'http://ipinfo.io/json'
+response = urlopen(url)
+data = json.load(response)
+print(data['loc'])
+print(type(data['loc']))
