@@ -50,10 +50,10 @@ Base = declarative_base()
 #     def __repr__(self) -> str:
 #         return f"{self.attendId} - {self.username}"
 
-# class Admin(Base):
-#     __tablename__ = 'admin'
-#     uname = Column(String, primary_key=True, nullable=False, unique=True)
-#     password = Column(String)
+class Admin(Base):
+    __tablename__ = 'admin'
+    uname = Column(String, primary_key=True, nullable=False, unique=True)
+    password = Column(String)
 
 
 Session = sessionmaker(bind=engine)
@@ -119,7 +119,7 @@ def location_logging():
             "locationDesc": locationDesc,
             "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         }
-        db.push(attendanceData)
+        db.child("AttendanceDetails").push(attendanceData)
     return render_template('Attendance_map_page.html')
 
 @app.route('/logout')
@@ -129,40 +129,43 @@ def logout():
 
 
 
-# @app.route('/adminlogin')
-# def adminlogin():
-#     return render_template('admin_loginPage.html')
+@app.route('/adminlogin')
+def adminlogin():
+    return render_template('admin_loginPage.html')
 
-# @app.route('/adminloggedin', methods=['GET','POST'])
-# def adminloggedin():
-#     if request.method=='POST':
-#         uname = request.form['uname']
-#         password = request.form['password']
+@app.route('/adminloggedin', methods=['GET','POST'])
+def adminloggedin():
+    if request.method=='POST':
+        uname = request.form['uname']
+        password = request.form['password']
         
-#         admin = session.query(Admin).filter_by(uname=uname).first()
-#         if(admin.uname == uname and admin.password == password):
-#             #flash('You are successfully logged in!')
-#             return redirect('/admin')
-#         else:   
-#             return redirect('/adminlogin')
-
-#             #flash('Your credential does not match!')
-#     #user = User.query.all()
-    
-#     return render_template('admin_loginPage.html')
+        admin = session.query(Admin).filter_by(uname=uname).first()
+        if(admin.uname == uname and admin.password == password):
+            #flash('You are successfully logged in!')
+            return redirect('/admin')
+        else:   
+            return redirect('/adminlogin')
 
 
-# @app.route('/admin')
-# def admin():
-#     allusers = session.query(User)
-#     print(allusers)
-#     return render_template('admin.html', allusers=allusers)
+@app.route('/admin')
+def admin():
+    # allusers = session.query(User)
+    # print(allusers)
+    # return render_template('admin.html', allusers=allusers)
+    return render_template('admin.html')
 
-# @app.route('/locationlogView')
-# def logview():
-#     attendance = session.query(Attendance)
-#     print(attendance)
-#     return render_template('attendance_view.html', attendance=attendance)
+@app.route('/locationlogView')
+def logview():
+
+    Attendance = db.child("AttendanceDetails").order_by_child("timestamp").get()
+    eachattendance = Attendance.each()
+    for i in eachattendance:
+        username = i.val()["username"]
+        location = i.val()["location"]
+        locationDesc = i.val()["locationDesc"]
+        timestamp = i.val()["timestamp"]
+        print(username+' '+location+' '+locationDesc+' '+timestamp)
+    return render_template('attendance_view.html')
 
 if __name__ == "__main__":
     app.run(debug=True,port=8000)

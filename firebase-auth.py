@@ -12,4 +12,13 @@ firebaseConfig = {'apiKey': "AIzaSyCEQhy_52fnsW-lbhgFEd-OhODWklqLOe4",
 
 firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
+db = firebase.database()
 
+Attendance = db.child("AttendanceDetails").order_by_child("timestamp").get()
+eachattendance = Attendance.each()
+for i in eachattendance:
+    username = i.val()["username"]
+    location = i.val()["location"]
+    locationDesc = i.val()["locationDesc"]
+    timestamp = i.val()["timestamp"]
+    print(username+' '+location+' '+locationDesc+' '+timestamp)

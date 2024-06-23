@@ -72,13 +72,13 @@
   </thead>
   <tbody>
 
-    {% for attendance in attendance %}
+    {% for attendance in eachattendance %}
             <tr>
                 <th scope="row">{{loop.index}}</th>
-                <td>{{attendance.username}}</td>
-                <td>{{attendance.location}}</td>
-                <td>{{attendance.locationDesc}}</td>
-                <td>{{attendance.dateTime}}</td>
+                <td>{{username}}</td>
+                <td>{{location}}</td>
+                <td>{{locationDesc}}</td>
+                <td>{{dateTime}}</td>
               </tr>
     {% endfor %}
 
