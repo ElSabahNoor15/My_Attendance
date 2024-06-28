@@ -4,119 +4,117 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
     <title>Compunet System - Admin View</title>
-    <script>
-      // Get the video
-      var video = document.getElementById("myVideo");
-      
-      
-      // Pause and play the video, and change the button text
-      </script>
-  <style>
-       #navbar {
-          background-color: #333;
-          overflow:initial;
-      }
-
-      #navbar a {
-          float: left;
-          display: block;
-          color: #f2f2f2;
-          text-align: center;
-          padding: 14px 20px;
-          text-decoration: none;
-      }
-
-      #navbar a:hover {
-          background-color: #ddd;
-          color: black;
-      }
-      #myVideo {
-        position:fixed;
-        z-index: -1;
-        right: 0;
-        bottom: 0;
-        min-width: 100%;
-        min-height: 100%;
-      }
-  </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            background: radial-gradient(ellipse at bottom, #0D1E31, #111);
+            overflow: hidden;
+            color: white;
+        }
+        .night {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            transform: rotateZ(40deg);
+        }
+        .star {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 4px;
+            background: linear-gradient(-45deg, #5F91FF, rgba(0, 0, 255, 0));
+            border-radius: 999px;
+            filter: drop-shadow(0 0 6px #699BFF);
+            animation: tail 3s ease-in-out infinite, falling 3s ease-in-out infinite;
+        }
+        @keyframes tail {
+            0% { width: 0; }
+            30% { width: 100px; }
+            100% { width: 0; }
+        }
+        @keyframes falling {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(300px); }
+        }
+        .star::before, .star::after {
+            content: '';
+            position: absolute;
+            top: calc(50% - 2px);
+            right: 0;
+            height: 4px;
+            background: linear-gradient(-45deg, rgba(0, 0, 255, 0), #5F91FF, rgba(0, 0, 255, 0));
+            border-radius: 100%;
+            transform: translateX(50%) rotateZ(45deg);
+            animation: shining 3s ease-in-out infinite;
+        }
+        @keyframes shining {
+            0% { width: 0; }
+            50% { width: 30px; }
+            100% { width: 0; }
+        }
+        .star::after {
+            transform: translateX(50%) rotateZ(-45deg);
+        }
+        .star:nth-child(1) { top: calc(50% - 100px); left: calc(50% - 250px); animation-delay: 1s; }
+        .star:nth-child(1)::before, .star:nth-child(1)::after { animation-delay: 1s; }
+        .star:nth-child(2) { top: calc(50% - 50px); left: calc(50% - 200px); animation-delay: 1.2s; }
+        .star:nth-child(2)::before, .star:nth-child(2)::after { animation-delay: 1.2s; }
+        .star:nth-child(3) { top: calc(50% - 0px); left: calc(50% - 150px); animation-delay: 1.4s; }
+        .star:nth-child(3)::before, .star:nth-child(3)::after { animation-delay: 1.4s; }
+        .star:nth-child(4) { top: calc(50% - -50px); left: calc(50% - 200px); animation-delay: 1.6s; }
+        .star:nth-child(4)::before, .star:nth-child(4)::after { animation-delay: 1.6s; }
+        .star:nth-child(5) { top: calc(50% - -100px); left: calc(50% - 250px); animation-delay: 1.8s; }
+        .star:nth-child(5)::before, .star:nth-child(5)::after { animation-delay: 1.8s; }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Compunet System</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <div class="night">
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+        <div class="star"></div>
+    </div>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="/admin">Admin</a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" href="/locationlogView">Attendance Log<span class="sr-only">(current)</span></a>
-      </li>
-      
-      <!-- <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Dropdown
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="/loginpage">Login</a>
-          <a class="dropdown-item" href="/registerpage">Register</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#">Something else here</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Compunet System</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin">Admin</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/locationlogView">Attendance Log<span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <button type="button" class="btn btn-dark my-sm-0" formaction="/adminlogout">Logout</button>
         </div>
-      </li> -->
-      <!-- <li class="nav-item">
-        <a class="nav-link" href="">Attendance Log</a>
-      </li> -->
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-    <li class="nav-item active">
-      <button type="button" class="btn btn-dark my-sm-0" type="submit">Logout</button>
-    </li>
-  
-  </div>
-</nav>
+    </nav>
+
+    <div class="container my-3">
+        <!-- Content goes here -->
+    </div>
+
     <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-
-
-        <div class="container my-3">
-        <h2>Employee Details</h2>
-          <p> </p>
-        <table class="table">
-  <thead>
-    <tr>
-        <th scope="col">SLNo</th>
-        <th scope="col">Username</th>
-        <th scope="col">Password</th>
-      </tr>
-  </thead>
-  <tbody>
-
-    {% for user in allusers %}
-            <tr>
-                <th scope="row">{{loop.index}}</th>
-                <td>{{user.username}}</td>
-                <td>{{user.password}}</td>
-              </tr>
-    {% endfor %}
-
-          </tbody>
-</table>
-          </div>
-
 </body>
 </html>

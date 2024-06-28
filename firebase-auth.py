@@ -21,4 +21,5 @@ for i in eachattendance:
     location = i.val()["location"]
     locationDesc = i.val()["locationDesc"]
     timestamp = i.val()["timestamp"]
-    print(username+' '+location+' '+locationDesc+' '+timestamp)
+    print(username+' '+location+' '+locationDesc)
+    print(type(timestamp))

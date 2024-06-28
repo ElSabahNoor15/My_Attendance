@@ -44,7 +44,7 @@
       <form class="form-inline my-2 my-lg-0">
         
         <!-- <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-        <button class="btn btn-dark my-2 my-sm-0" type="submit" formaction="/adminlogin" name="loginbtn">Logout</button>
+        <button class="btn btn-dark my-2 my-sm-0" type="submit" formaction="/adminlogout" name="loginbtn">Logout</button>
       </form>
       
     
@@ -72,13 +72,13 @@
   </thead>
   <tbody>
 
-    {% for attendance in eachattendance %}
+    {% for attendance in attendance_list %}
             <tr>
                 <th scope="row">{{loop.index}}</th>
-                <td>{{username}}</td>
-                <td>{{location}}</td>
-                <td>{{locationDesc}}</td>
-                <td>{{dateTime}}</td>
+                <td>{{attendance.username}}</td>
+                <td>{{attendance.location}}</td>
+                <td>{{attendance.locationDesc}}</td>
+                <td>{{attendance.timestamp}}</td>
               </tr>
     {% endfor %}
 
